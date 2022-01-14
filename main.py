@@ -16,7 +16,7 @@ import wikipedia
 wikipedia.set_lang("it")
 
 '''
-Window.size = (500, 300)
+Window.size = (500, 300)Trying to implement wake up word with porcupine
 Window.borderless = True
 
 class Lisa(App):
@@ -59,7 +59,6 @@ def take_command():
 			if 'lisa' in command:
 				playsound('Audio/Lisa_wake-up.mp3')
 				command = command.replace('lisa', '')
-				#speak("I am fine, thank you")
 				print (command)			
 	except:
 		pass
@@ -68,8 +67,7 @@ def take_command():
 def run_lisa():
 	command = take_command()
 	if 'cerca informazioni' in command:
-		argument = command.replace('cerca informazioni su ', '')
-		SearchWiki = wikipedia.suggest(argument)
+		SearchWiki = command.replace('cerca informazioni su ', '')
 		print(wikipedia.summary(SearchWiki, sentences=1))
 	'''if 'che tempo' in command:
 		location = command.replace('che tempo farà ', '')
