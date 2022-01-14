@@ -16,18 +16,18 @@ class lisa_gui(QMainWindow):
 
         self.label = QLabel(self)
         self.label.setText("Ciao, cosa posso fare per te?")
-        self.label.setStyleSheet("background-color: #353535;""border: 1px #353535;""color: #FFFFFF;""font: bold 15pt 'Product Sans';")
-        self.label.setGeometry(30,10,350,40)
+        self.label.setStyleSheet("background-color: #353535;""border: 1px #353535;""color: #B470DD;""font: bold 15pt 'Product Sans';")
+        self.label.setGeometry(35,15,350,40)
         
-        animation = QLabel()
+        self.animation = QLabel(self)
         movie = QMovie("Animations/Lisa_animation_transparent.gif")
-        animation.setMovie(movie)
+        self.animation.setMovie(movie)
         #animation.setMovie(self.movie)
         #animation.setAlignment(QtCore.Qt.AlignCenter)
         #animation.setStyleSheet("margin-top: 100px;")
         #self.animation.setMovie(movie)
-        animation.move(0, 0)
-        #animation.setGeometry(160,60,80,80)
+        #self.animation.move(160, 60)
+        self.animation.setGeometry(160,60,80,80)
         movie.start()
 
         self.show()
@@ -40,8 +40,7 @@ class lisa_gui(QMainWindow):
 
 app = QApplication(sys.argv)
 #window = QWidget()
-#window.setFixedWidth(400)
 app.setStyleSheet("QMainWindow{background-color: #353535; border: 1px solid black;}") # border-radius: 22px;
-
-ex = lisa_gui()
+#window.setLayout(grid)
+Window = lisa_gui()
 sys.exit(app.exec())
