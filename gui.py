@@ -10,12 +10,12 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
 
         # Window size
-        
         self.setFixedSize(400, 1017)
 
         # Widget
         self.centralwidget = QWidget(self)
-        self.centralwidget.resize(400, 150)
+        HEIGHT = 150
+        self.centralwidget.resize(400, HEIGHT)
         
         #self.mwidget = QMainWindow(self)
         
@@ -56,6 +56,9 @@ class MainWindow(QMainWindow):
 
         self.show()
 
+        #time.sleep(2)
+        #WikiWindow()
+
     def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
@@ -64,6 +67,7 @@ class MainWindow(QMainWindow):
 
     def WikiWindow(self):
         HEIGHT = 400
+        self.centralwidget.resize(400, HEIGHT)
 
 app = QApplication(sys.argv)
 #window = QWidget()
