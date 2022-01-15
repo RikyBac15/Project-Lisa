@@ -1,4 +1,5 @@
 import sys
+import time
 from PyQt5.QtWidgets import (QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog, QGridLayout, QMainWindow, QDesktopWidget)
 from PyQt5.QtGui import QPixmap, QCursor, QMovie
 from PyQt5 import QtGui, QtCore, QtWidgets
@@ -9,10 +10,8 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
 
         # Window size
-        '''self.WIDTH = 300
-        self.HEIGHT = 300
-        self.resize(self.WIDTH, self.HEIGHT)'''
-        self.setFixedSize(400, 150)
+        
+        self.setFixedSize(400, 1017)
 
         # Widget
         self.centralwidget = QWidget(self)
@@ -62,6 +61,9 @@ class MainWindow(QMainWindow):
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
+
+    def WikiWindow(self):
+        HEIGHT = 400
 
 app = QApplication(sys.argv)
 #window = QWidget()
