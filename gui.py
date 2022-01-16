@@ -42,28 +42,50 @@ class MainWindow(QMainWindow):
         self.label.setText("Ciao, cosa posso fare per te?")
         self.label.setStyleSheet("background-color: #353535;""border: 1px #353535;""color: #B470DD;""font: bold 15pt 'Product Sans';")
         self.label.setGeometry(35,15,350,40)
-        
+        '''
         self.animation = QLabel(self)
-        movie = QMovie("Animations/Lisa_animation_transparent.gif")
+        #movie = QMovie("Assets/Lisa_animation_transparent.gif")
+        movie = QMovie("Assets/Lisa_animation_V3_rev2.gif")
+        #movie = QMovie("Assets/Lisa_animation_V2.gif")
         self.animation.setMovie(movie)
         #animation.setMovie(self.movie)
         #animation.setAlignment(QtCore.Qt.AlignCenter)
         #animation.setStyleSheet("margin-top: 100px;")
         #self.animation.setMovie(movie)
         #self.animation.move(160, 60)
-        self.animation.setGeometry(160,60,80,80)
-        movie.start()
+        self.animation.setGeometry(155,55,90,90)
+        #self.animation.setGeometry(160,60,80,80)
+        #self.animation.setGeometry(100,70,200,56)
+        movie.start()'''
+
+        self.button = QPushButton('', self)
+        self.button.setGeometry(173, 65, 55, 70)
+        self.button.clicked.connect(self.clickme)
+        self.button.setStyleSheet("background-color: #353535; background-image : url(Assets/Microphone_icon_little.png); border-radius: 22px")
+
+        #time.sleep(5)
+        #self.animation.hide()
+        #WikiWindow()
 
         self.show()
-
-        #time.sleep(2)
-        #WikiWindow()
 
     def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
+
+    def clickme(self):
+        #self.animation.hide()
+        self.button.hide()
+        self.animation = QLabel(self)
+        movie = QMovie("Assets/Lisa_animation_V3_rev2.gif")
+        self.animation.setMovie(movie)
+        self.animation.setGeometry(155,55,90,90)
+        movie.start()
+        self.animation.show()
+
+        print("pressed")
 
     def WikiWindow(self):
         HEIGHT = 400
