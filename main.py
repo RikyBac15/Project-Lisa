@@ -2,32 +2,19 @@ import speech_recognition as sr
 from playsound import playsound
 import python_weather
 import asyncio
-'''from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.label import Label
-from kivy.uix.image import Image
-from kivy.uix.button import Button
-from kivy.uix.textinput import TextInput
-from kivy.core.window import Window'''
+#import gui
 #import pyttsx3
 import os
 import wikipedia
+import pywhatkit
 
 wikipedia.set_lang("it")
 
-'''
-Window.size = (500, 300)Trying to implement wake up word with porcupine
-Window.borderless = True
-
-class Lisa(App):
-    def build(self):
-        self.window = GridLayout()
-        #add widgets to window
-
-        return self.window
-'''
 listener = sr.Recognizer()
-listener.pause_threshold = 1
+listener.pause_threshold = 3
+
+global command
+
 '''engine = pyttsx3.init()
 
 def speak(text):
@@ -51,17 +38,18 @@ async def getweather(date):
 
 def take_command():
 	try:
-		with sr.Microphone(device_index=4) as source:
+		with sr.Microphone(index=4) as source:
 			print('listening...')
+			listener.adjust_for_ambient_noise(source)
 			voice = listener.listen(source)
 			command = listener.recognize_google(voice, language="it-IT")
 			command = command.lower()
-			if 'lisa' in command:
-				playsound('Audio/Lisa_wake-up.mp3')
-				command = command.replace('lisa', '')
-				print (command)			
+			print(command)
+					
 	except:
-		pass
+		print("ERROR")
+		#exit()
+
 	return command
 
 def run_lisa():
@@ -77,5 +65,16 @@ def run_lisa():
 		elif (date == 'oggi'):
 			when = 'today'
 		print (getweather(when))'''
+	if 'riproduci' in command:
+		song = command.replace('riproduci', '')
+		pywhatkit.playonyt(song)
 
-run_lisa()
+	'''
+	if 'quanto fa' in command:
+		if '+' in command:
+			factor1 = command.replace('quanto fa', '')
+			factor1 = command.replace('più', '')
+	'''
+
+if __name__ == "__main__":
+	run_lisa()
