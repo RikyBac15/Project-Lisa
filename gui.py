@@ -3,7 +3,8 @@ import time
 from PyQt5.QtWidgets import (QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog, QGridLayout, QMainWindow, QDesktopWidget)
 from PyQt5.QtGui import QPixmap, QCursor, QMovie
 from PyQt5 import QtGui, QtCore, QtWidgets
-from PyQt5.QtCore import QCoreApplication, Qt
+from PyQt5.QtCore import QCoreApplication, Qt, QPropertyAnimation
+from PyQt5.QtCore import pyqtSignal as Signal
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -14,8 +15,7 @@ class MainWindow(QMainWindow):
 
         # Widget
         self.centralwidget = QWidget(self)
-        HEIGHT = 150
-        self.centralwidget.resize(400, HEIGHT)
+        self.centralwidget.resize(400, 150)
         
         #self.mwidget = QMainWindow(self)
         
@@ -77,6 +77,7 @@ class MainWindow(QMainWindow):
 
     def clickme(self):
         #self.animation.hide()
+        self.resizeMainWindow(400, 400)
         self.button.hide()
         self.animation = QLabel(self)
         movie = QMovie("Assets/Lisa_animation_V3_rev2.gif")
@@ -88,8 +89,15 @@ class MainWindow(QMainWindow):
         print("pressed")
 
     def WikiWindow(self):
-        HEIGHT = 400
-        self.centralwidget.resize(400, HEIGHT)
+        self.resizeMainWindow(400, 400)
+        #self.centralwidget.resize(400, HEIGHT)
+
+    def resizeMainWindow(self, width, height):
+        self.animation = QPropertyAnimation(self.centralwidget, b"size")
+        self.animation.setDuration(1000)
+        self.animation.setEndValue(QtCore.QSize(width, height))
+        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuad)
+        self.animation.start()
 
 app = QApplication(sys.argv)
 #window = QWidget()

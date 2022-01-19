@@ -13,8 +13,6 @@ wikipedia.set_lang("it")
 listener = sr.Recognizer()
 listener.pause_threshold = 3
 
-global command
-
 '''engine = pyttsx3.init()
 
 def speak(text):
@@ -38,7 +36,7 @@ async def getweather(date):
 
 def take_command():
 	try:
-		with sr.Microphone(index=4) as source:
+		with sr.Microphone(device_index=4) as source:
 			print('listening...')
 			listener.adjust_for_ambient_noise(source)
 			voice = listener.listen(source)
@@ -48,7 +46,7 @@ def take_command():
 					
 	except:
 		print("ERROR")
-		#exit()
+		exit()
 
 	return command
 
