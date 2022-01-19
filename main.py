@@ -38,16 +38,16 @@ def take_command():
 	try:
 		with sr.Microphone(device_index=4) as source:
 			print('listening...')
-			listener.adjust_for_ambient_noise(source)
+			#listener.adjust_for_ambient_noise(source)
 			voice = listener.listen(source)
 			command = listener.recognize_google(voice, language="it-IT")
 			command = command.lower()
 			print(command)
-					
+
 	except:
 		print("ERROR")
-		exit()
-
+		#exit()
+    
 	return command
 
 def run_lisa():
@@ -55,6 +55,7 @@ def run_lisa():
 	if 'cerca informazioni' in command:
 		SearchWiki = command.replace('cerca informazioni su ', '')
 		print(wikipedia.summary(SearchWiki, sentences=1))
+	
 	'''if 'che tempo' in command:
 		location = command.replace('che tempo farà ', '')
 		date = command.replace('che tempo farà', '') + command.replace('a ', location)
@@ -63,6 +64,7 @@ def run_lisa():
 		elif (date == 'oggi'):
 			when = 'today'
 		print (getweather(when))'''
+	
 	if 'riproduci' in command:
 		song = command.replace('riproduci', '')
 		pywhatkit.playonyt(song)
