@@ -3,7 +3,7 @@ import time
 from PyQt5.QtWidgets import (QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog, QGridLayout, QMainWindow, QDesktopWidget)
 from PyQt5.QtGui import QPixmap, QCursor, QMovie
 from PyQt5 import QtGui, QtCore, QtWidgets
-from PyQt5.QtCore import QCoreApplication, Qt, QPropertyAnimation, QSize
+from PyQt5.QtCore import QCoreApplication, Qt, QPropertyAnimation, QSize, QTime, QTimer, QEventLoop
 from PyQt5.QtCore import pyqtSignal as Signal
 
 class MainWindow(QMainWindow):
@@ -42,32 +42,33 @@ class MainWindow(QMainWindow):
         self.label.setText("Ciao, cosa posso fare per te?")
         self.label.setStyleSheet("background-color: #353535;""border: 1px #353535;""color: #B470DD;""font: bold 15pt 'Product Sans';")
         self.label.setGeometry(35,15,350,40)
-        '''
-        self.animation = QLabel(self)
-        #movie = QMovie("Assets/Lisa_animation_transparent.gif")
-        movie = QMovie("Assets/Lisa_animation_V3_rev2.gif")
-        #movie = QMovie("Assets/Lisa_animation_V2.gif")
-        self.animation.setMovie(movie)
-        #animation.setMovie(self.movie)
-        #animation.setAlignment(QtCore.Qt.AlignCenter)
-        #animation.setStyleSheet("margin-top: 100px;")
-        #self.animation.setMovie(movie)
-        #self.animation.move(160, 60)
-        self.animation.setGeometry(155,55,90,90)
-        #self.animation.setGeometry(160,60,80,80)
-        #self.animation.setGeometry(100,70,200,56)
-        movie.start()'''
 
         self.button = QPushButton('', self)
         self.button.setGeometry(173, 65, 55, 70)
         self.button.clicked.connect(self.clickme)
         self.button.setStyleSheet("background-color: #353535; background-image : url(Assets/Microphone_icon_little.png); border-radius: 22px")
 
-        #time.sleep(5)
-        #self.animation.hide()
-        #WikiWindow()
-
         self.show()
+
+    def WikiWindow(self, image, text):
+        self.resizeMainWindow(400, 400)
+        loop = QEventLoop()
+        QTimer.singleShot(1000, loop.quit)
+        loop.exec_()
+        self.pixmap = QLabel(self)
+        #image = "Assets/Microphone_icon.png"
+        self.picture = QPixmap(image)
+        self.pixmap.setPixmap(self.picture)
+        self.pixmap.move(100,150)
+        self.pixmap.show()
+        
+        self.informations = QLabel(self)
+        #text = "Funzia GG"
+        self.informations.setText(text)
+        self.informations.setStyleSheet("background-color: #353535;""border: 1px #353535;""color: #B470DD;""font: bold 15pt 'Product Sans';")
+        self.informations.setGeometry(35,200,350,40)
+        self.informations.show()
+        
 
     def center(self):
         qr = self.frameGeometry()
@@ -76,8 +77,6 @@ class MainWindow(QMainWindow):
         self.move(qr.topLeft())
 
     def clickme(self):
-        #self.animation.hide()
-        #self.centralwidget.resize(400, x)
         self.button.hide()
         self.animation = QLabel(self)
         movie = QMovie("Assets/Lisa_animation_V3_rev2.gif")
@@ -85,25 +84,19 @@ class MainWindow(QMainWindow):
         self.animation.setGeometry(155,55,90,90)
         movie.start()
         self.animation.show()
-        self.resizeMainWindow(400, 450)
+        
+        self.WikiWindow("Assets/Microphone_icon.png", "Funzia GG")
 
         print("pressed")
 
-    def WikiWindow(self):
-        self.resizeMainWindow(400, 400)
-        #self.centralwidget.resize(400, HEIGHT)
-
     def resizeMainWindow(self, WIDTH, HEIGHT):
         self.animation = QPropertyAnimation(self.centralwidget, b"size")
-        self.animation.setDuration(1000)
-        #self.animation.setStartValue(QtCore.QSize(self.centralwidget.width(), 150))
+        self.animation.setDuration(750)
         self.animation.setEndValue(QtCore.QSize(WIDTH, HEIGHT))
         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuad)
         self.animation.start()
 
 app = QApplication(sys.argv)
-#window = QWidget()
 app.setStyleSheet("QMainWindow{background-color: #353535; border: 1px solid black;}") # border-radius: 22px;
-#window.setLayout(grid)
 Window = MainWindow()
 sys.exit(app.exec())
