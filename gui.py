@@ -51,22 +51,23 @@ class MainWindow(QMainWindow):
         self.show()
 
     def WikiWindow(self, image, text):
+        self.animation.hide()
+        self.label.setText("Ecco cosa ho trovato:")
         self.resizeMainWindow(400, 400)
         loop = QEventLoop()
         QTimer.singleShot(1000, loop.quit)
         loop.exec_()
         self.pixmap = QLabel(self)
-        #image = "Assets/Microphone_icon.png"
         self.picture = QPixmap(image)
-        self.pixmap.setPixmap(self.picture)
-        self.pixmap.move(100,150)
+        self.pixmap.setPixmap(self.picture.scaled(340, 200))
+        self.pixmap.setGeometry(30,70,340,200)
+        self.pixmap.setStyleSheet("border: 1px #353535; border-radius: 22px;")
         self.pixmap.show()
         
         self.informations = QLabel(self)
-        #text = "Funzia GG"
         self.informations.setText(text)
-        self.informations.setStyleSheet("background-color: #353535;""border: 1px #353535;""color: #B470DD;""font: bold 15pt 'Product Sans';")
-        self.informations.setGeometry(35,200,350,40)
+        self.informations.setStyleSheet("background-color: #353535;""border: 1px #353535;""color: #FFFFFF;""font: bold 12pt 'Product Sans';")
+        self.informations.setGeometry(35,275,350,40)
         self.informations.show()
         
 
@@ -85,7 +86,7 @@ class MainWindow(QMainWindow):
         movie.start()
         self.animation.show()
         
-        self.WikiWindow("Assets/Microphone_icon.png", "Funzia GG")
+        self.WikiWindow("Assets/Test.jpg", "Funzia GG")
 
         print("pressed")
 

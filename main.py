@@ -2,7 +2,7 @@ import speech_recognition as sr
 from playsound import playsound
 import python_weather
 import asyncio
-import gui
+#import gui
 #import pyttsx3
 import os
 import wikipedia
@@ -11,7 +11,7 @@ import pywhatkit
 wikipedia.set_lang("it")
 
 listener = sr.Recognizer()
-listener.pause_threshold = 3
+listener.pause_threshold = 2
 
 '''engine = pyttsx3.init()
 
@@ -55,6 +55,7 @@ def run_lisa():
 	if 'cerca informazioni' in command:
 		SearchWiki = command.replace('cerca informazioni su ', '')
 		print(wikipedia.summary(SearchWiki, sentences=1))
+		#gui.WikiWindow(wikipedia.SearchWiki.images[0], wikipedia.summary(SearchWiki, sentences=1, auto_suggest=True, redirect=True))
 	
 	'''if 'che tempo' in command:
 		location = command.replace('che tempo farà ', '')
@@ -78,3 +79,4 @@ def run_lisa():
 
 if __name__ == "__main__":
 	run_lisa()
+	#Window = MainWindow()
