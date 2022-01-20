@@ -58,16 +58,18 @@ class MainWindow(QMainWindow):
         QTimer.singleShot(1000, loop.quit)
         loop.exec_()
         self.pixmap = QLabel(self)
-        self.picture = QPixmap(image)
-        self.pixmap.setPixmap(self.picture.scaled(340, 200))
-        self.pixmap.setGeometry(30,70,340,200)
-        self.pixmap.setStyleSheet("border: 1px #353535; border-radius: 22px;")
+        #self.picture = QPixmap(image)
+        #self.pixmap.setPixmap(self.picture.scaled(340, 200, QtCore.Qt.KeepAspectRatio))
+        self.pixmap.setGeometry(30,60,340,191)
+        self.pixmap.setStyleSheet("border-image: url(Assets/Test2.jpg); background-color: #353535; border-radius: 22px;")
         self.pixmap.show()
         
         self.informations = QLabel(self)
         self.informations.setText(text)
-        self.informations.setStyleSheet("background-color: #353535;""border: 1px #353535;""color: #FFFFFF;""font: bold 12pt 'Product Sans';")
-        self.informations.setGeometry(35,275,350,40)
+        self.informations.setStyleSheet("background-color: #353535;""border: 1px #353535;""color: #FFFFFF;""font: bold 10.8pt 'Product Sans';")
+        self.informations.setAlignment(QtCore.Qt.AlignLeft)
+        self.informations.setGeometry(30,272,348,100)
+        self.informations.setWordWrap(True)
         self.informations.show()
         
 
@@ -86,7 +88,7 @@ class MainWindow(QMainWindow):
         movie.start()
         self.animation.show()
         
-        self.WikiWindow("Assets/Test.jpg", "Funzia GG")
+        self.WikiWindow("Assets/Test.jpg", "Barack Hussein Obama II (/bəˈrɑːk hʊˈseɪn oʊˈbɑːmə/, pronuncia[?·info]; Honolulu, 4 agosto 1961) è un politico statunitense, 44º presidente degli Stati Uniti d'America dal 2009 al 2017, prima persona di origini afroamericane a ricoprire tale carica. " )
 
         print("pressed")
 
