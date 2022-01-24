@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
         # Initial
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setWindowOpacity(0.6)
+        self.setWindowOpacity(1)
 
         radius = 30
         self.centralwidget.setStyleSheet(
