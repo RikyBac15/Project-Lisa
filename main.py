@@ -3,7 +3,7 @@ from playsound import playsound
 #import python_weather
 import asyncio
 #import gui
-#import pyttsx3
+import pyttsx3
 import os
 import wikipedia
 import pywhatkit
