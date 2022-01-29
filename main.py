@@ -1,6 +1,6 @@
 import speech_recognition as sr
 from playsound import playsound
-import python_weather
+#import python_weather
 import asyncio
 #import gui
 #import pyttsx3
@@ -36,7 +36,7 @@ async def getweather(date):
 
 def take_command():
 	try:
-		with sr.Microphone(device_index=4) as source:
+		with sr.Microphone(device_index=1) as source:
 			print('listening...')
 			#listener.adjust_for_ambient_noise(source)
 			voice = listener.listen(source)
