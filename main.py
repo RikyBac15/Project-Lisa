@@ -53,6 +53,12 @@ def take_command():
 def run_lisa():
 	command = take_command()
 
+	if 'ora' in command:
+		now = datetime.now()
+
+		current_time = now.strftime("%H:%M")
+		print("Orario Attuale =", current_time)
+
 	if 'meteo' in command:
 		#coso di openweather
 		api_key = "f7e24a88f356a42160be8be935ac5e17"
