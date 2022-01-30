@@ -7,6 +7,9 @@ import asyncio
 import os
 import wikipedia
 import pywhatkit
+#openweather json call
+import requests, json
+from datetime import datetime
 
 wikipedia.set_lang("it")
 
