@@ -8,10 +8,14 @@ import os
 import wikipedia
 import pywhatkit
 
+
+import requests, json
+
 wikipedia.set_lang("it")
 
 listener = sr.Recognizer()
 listener.pause_threshold = 2
+
 
 '''engine = pyttsx3.init()
 
@@ -76,6 +80,47 @@ def run_lisa():
 			factor1 = command.replace('quanto fa', '')
 			factor1 = command.replace('più', '')
 	'''
+
+	if 'meteo' in command:
+		#coso di openweather
+		api_key = "f7e24a88f356a42160be8be935ac5e17"
+
+		base_url = "http://api.openweathermap.org/data/2.5/weather?"
+
+		city_name = command.replace('dimmi il meteo di ', '')
+
+		complete_url = base_url + "appid=" + api_key + "&units=metric" + "&lang=it" + "&q=" + city_name
+
+		response = requests.get(complete_url)
+
+		x = response.json()
+
+		if x["cod"] != "404":
+
+			y = x["main"]
+
+			current_temperature = y["temp"]
+
+			current_pressure = y["pressure"]
+
+			current_humidity = y["humidity"]
+
+			z = x["weather"]
+
+			weather_description = z[0]["description"]
+
+			print(" Temperatura = " +
+							str(current_temperature) + "°C" +
+				"\n Pressione Atmosferica = " +
+							str(current_pressure) + "hPa" +
+				"\n umidità = " + 
+							str(current_humidity) + "%" +
+				"\n descrizione = " +
+							str(weather_description))
+
+		else:
+			print(" City Not Found ")
+
 
 if __name__ == "__main__":
 	run_lisa()
