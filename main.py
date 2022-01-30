@@ -9,8 +9,10 @@ import wikipedia
 import pywhatkit
 #openweather json call
 import requests, json
+from datetime import datetime
 
 wikipedia.set_lang("it")
+
 
 listener = sr.Recognizer()
 listener.pause_threshold = 2
@@ -55,6 +57,12 @@ def take_command():
 
 def run_lisa():
 	command = take_command()
+	if 'ora' in command:
+		now = datetime.now()
+
+		current_time = now.strftime("%H:%M:%S")
+		print("Orario Attuale =", current_time)
+
 	if 'cerca informazioni' in command:
 		SearchWiki = command.replace('cerca informazioni su ', '')
 		print(wikipedia.summary(SearchWiki, sentences=1))
@@ -109,13 +117,13 @@ def run_lisa():
 			weather_description = z[0]["description"]
 
 			print(" Temperatura = " +
-							str(current_temperature) + "°C" +
+				str(current_temperature) + "°C" +
 				"\n Pressione Atmosferica = " +
-							str(current_pressure) + "hPa" +
+				str(current_pressure) + "hPa" +
 				"\n umidità = " + 
-							str(current_humidity) + "%" +
+				str(current_humidity) + "%" +
 				"\n descrizione = " +
-							str(weather_description))
+				str(weather_description))
 
 		else:
 			print(" Città inesistente ")
