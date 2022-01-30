@@ -60,7 +60,7 @@ def run_lisa():
 	if 'ora' in command:
 		now = datetime.now()
 
-		current_time = now.strftime("%H:%M:%S")
+		current_time = now.strftime("%H:%M")
 		print("Orario Attuale =", current_time)
 
 	if 'cerca informazioni' in command:
