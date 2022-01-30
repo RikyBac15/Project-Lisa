@@ -7,8 +7,7 @@ import pyttsx3
 import os
 import wikipedia
 import pywhatkit
-
-
+#openweather json call
 import requests, json
 
 wikipedia.set_lang("it")
@@ -119,7 +118,7 @@ def run_lisa():
 							str(weather_description))
 
 		else:
-			print(" City Not Found ")
+			print(" Città inesistente ")
 
 
 if __name__ == "__main__":
