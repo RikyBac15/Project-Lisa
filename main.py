@@ -1,6 +1,9 @@
 import speech_recognition as sr
 from playsound import playsound
+<<<<<<< Updated upstream
 #import python_weather
+=======
+>>>>>>> Stashed changes
 import asyncio
 #import gui
 import pyttsx3
@@ -10,7 +13,6 @@ import pywhatkit
 #openweather json call
 import requests, json
 from datetime import datetime
-
 wikipedia.set_lang("it")
 
 
@@ -127,6 +129,21 @@ def run_lisa():
 
 		else:
 			print(" Città inesistente ")
+<<<<<<< Updated upstream
+=======
+			speak("Non sono riuscita a trovare la città, riprovare")
+		
+	if 'cerca informazioni' in command:
+		SearchWiki = command.replace('cerca informazioni su ', '')
+		print(wikipedia.summary(SearchWiki, sentences=1))
+		speak("Ecco cosa ho trovato su " + SearchWiki + wikipedia.summary(SearchWiki, sentences=1))
+		#gui.WikiWindow(wikipedia.SearchWiki.images[0], wikipedia.summary(SearchWiki, sentences=1, auto_suggest=True, redirect=True))
+	
+	if 'riproduci' in command:
+		song = command.replace('riproduci', '')
+		pywhatkit.playonyt(song)
+		speak("Riproduco " + song)
+>>>>>>> Stashed changes
 
 
 if __name__ == "__main__":
