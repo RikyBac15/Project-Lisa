@@ -9,33 +9,19 @@ import pywhatkit
 #openweather json call
 import requests, json
 from datetime import datetime
-wikipedia.set_lang("it")
 
+wikipedia.set_lang("it")
 
 listener = sr.Recognizer()
 listener.pause_threshold = 2
 
-
-'''engine = pyttsx3.init()
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[1].id)
 
 def speak(text):
     engine.say(text)
     engine.runAndWait()
-
-async def getweather(date):
-	client = python_weather.Client(format=python_weather.METRIC)
-	
-	weather = await client.find('Bologna')
-
-    # returns the current day's forecast temperature (int)
-    print(weather.current.temperature)
-
-    # get the weather forecast for a few days
-    for forecast in weather.forecasts:
-        print(str(forecast.date), forecast.sky_text, forecast.temperature)
-
-    # close the wrapper once done
-    await client.close()'''
 
 def take_command():
 	try:
@@ -49,42 +35,21 @@ def take_command():
 
 	except:
 		print("ERROR")
+		speak("Non ho capito, riprovare")
+		#take_command()
 		#exit()
     
 	return command
 
 def run_lisa():
 	command = take_command()
+
 	if 'ora' in command:
 		now = datetime.now()
 
 		current_time = now.strftime("%H:%M")
 		print("Orario Attuale =", current_time)
-
-	if 'cerca informazioni' in command:
-		SearchWiki = command.replace('cerca informazioni su ', '')
-		print(wikipedia.summary(SearchWiki, sentences=1))
-		#gui.WikiWindow(wikipedia.SearchWiki.images[0], wikipedia.summary(SearchWiki, sentences=1, auto_suggest=True, redirect=True))
-	
-	'''if 'che tempo' in command:
-		location = command.replace('che tempo farà ', '')
-		date = command.replace('che tempo farà', '') + command.replace('a ', location)
-		if (date == 'domani'):
-			when = 'tomorrow'
-		elif (date == 'oggi'):
-			when = 'today'
-		print (getweather(when))'''
-	
-	if 'riproduci' in command:
-		song = command.replace('riproduci', '')
-		pywhatkit.playonyt(song)
-
-	'''
-	if 'quanto fa' in command:
-		if '+' in command:
-			factor1 = command.replace('quanto fa', '')
-			factor1 = command.replace('più', '')
-	'''
+		speak("Sono le " + current_time)
 
 	if 'meteo' in command:
 		#coso di openweather
@@ -122,11 +87,11 @@ def run_lisa():
 				str(current_humidity) + "%" +
 				"\n descrizione = " +
 				str(weather_description))
+			speak("La Temperatura attuale a " + city_name + " è di " + current_temperature + " con " + weather_description)
 
 		else:
 			print(" Città inesistente ")
 			speak("Non sono riuscita a trovare la città, riprovare")
-		
 	if 'cerca informazioni' in command:
 		SearchWiki = command.replace('cerca informazioni su ', '')
 		print(wikipedia.summary(SearchWiki, sentences=1))
@@ -137,6 +102,13 @@ def run_lisa():
 		song = command.replace('riproduci', '')
 		pywhatkit.playonyt(song)
 		speak("Riproduco " + song)
+
+	'''
+	if 'quanto fa' in command:
+		if '+' in command:
+			factor1 = command.replace('quanto fa', '')
+			factor1 = command.replace('più', '')
+	'''
 
 if __name__ == "__main__":
 	run_lisa()
