@@ -1,9 +1,5 @@
 import speech_recognition as sr
 from playsound import playsound
-<<<<<<< Updated upstream
-#import python_weather
-=======
->>>>>>> Stashed changes
 import asyncio
 #import gui
 import pyttsx3
@@ -129,8 +125,6 @@ def run_lisa():
 
 		else:
 			print(" Città inesistente ")
-<<<<<<< Updated upstream
-=======
 			speak("Non sono riuscita a trovare la città, riprovare")
 		
 	if 'cerca informazioni' in command:
@@ -143,8 +137,6 @@ def run_lisa():
 		song = command.replace('riproduci', '')
 		pywhatkit.playonyt(song)
 		speak("Riproduco " + song)
->>>>>>> Stashed changes
-
 
 if __name__ == "__main__":
 	run_lisa()
