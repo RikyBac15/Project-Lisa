@@ -1,6 +1,5 @@
 import speech_recognition as sr
 from playsound import playsound
-import python_weather
 import asyncio
 #import gui
 import pyttsx3
