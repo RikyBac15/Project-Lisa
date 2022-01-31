@@ -41,7 +41,7 @@ async def getweather(date):
 
 def take_command():
 	try:
-		with sr.Microphone(device_index=1) as source:
+		with sr.Microphone(device_index=0) as source:
 			print('listening...')
 			#listener.adjust_for_ambient_noise(source)
 			voice = listener.listen(source)
