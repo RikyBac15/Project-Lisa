@@ -1,31 +1,42 @@
 import speech_recognition as sr
 from playsound import playsound
 import asyncio
+import time
+import random
 #import gui
-import pyttsx3
+#import pyttsx3
 import os
 import wikipedia
 import pywhatkit
 #openweather json call
 import requests, json
 from datetime import datetime
+from gtts import gTTS
+#import keyboard
+#import uinput
+import pyautogui
+
+#device =  uinput.Device((uinput.KEY_W,uinput.KEY_Simport os))
+
+language = 'it'
 
 wikipedia.set_lang("it")
 
 listener = sr.Recognizer()
 listener.pause_threshold = 2
-
+'''
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
-
-def speak(text):
-    engine.say(text)
-    engine.runAndWait()
+'''
+def speak(mytext):
+    say = gTTS(text=mytext, lang=language, slow=False)
+    say.save("Records/say.mp3")
+    playsound("Records/say.mp3")
 
 def take_command():
 	try:
-		with sr.Microphone(device_index=0) as source:
+		with sr.Microphone(device_index=4) as source:
 			print('listening...')
 			#listener.adjust_for_ambient_noise(source)
 			voice = listener.listen(source)
@@ -51,7 +62,16 @@ def run_lisa():
 		print("Orario Attuale =", current_time)
 		speak("Sono le " + current_time)
 
-	if 'meteo' in command:
+	elif "creatore" in command:
+		speak("I miei creatori sono un gruppo di 4 ragazzi con molta voglia di fare")
+
+	elif "come stai" in command:
+		speak(random.choice(["Bene, grazie", "Faccio quello che mi piace, darti una mano", "Sono pronto per le tue domande"]))
+
+	elif 'cara' in command: 
+		speak("Ciao Zanna, come sta Giada?")
+
+	elif 'meteo' in command:
 		#coso di openweather
 		api_key = "f7e24a88f356a42160be8be935ac5e17"
 
@@ -79,6 +99,8 @@ def run_lisa():
 
 			weather_description = z[0]["description"]
 
+			current_temperature = round(current_temperature)
+
 			print(" Temperatura = " +
 				str(current_temperature) + "°C" +
 				"\n Pressione Atmosferica = " +
@@ -87,29 +109,44 @@ def run_lisa():
 				str(current_humidity) + "%" +
 				"\n descrizione = " +
 				str(weather_description))
-			speak("La Temperatura attuale a " + city_name + " è di " + current_temperature + " con " + weather_description)
+			current_temperature = str(current_temperature)
+			speak("La Temperatura attuale a " + city_name + " è di " + current_temperature + "gradi con " + weather_description)
 
 		else:
 			print(" Città inesistente ")
 			speak("Non sono riuscita a trovare la città, riprovare")
-	if 'cerca informazioni' in command:
+
+	elif 'cerca informazioni' in command:
 		SearchWiki = command.replace('cerca informazioni su ', '')
 		print(wikipedia.summary(SearchWiki, sentences=1))
-		speak("Ecco cosa ho trovato su " + SearchWiki + wikipedia.summary(SearchWiki, sentences=1))
+		speak("Ecco cosa ho trovato su " + SearchWiki)
+		speak(wikipedia.summary(SearchWiki, sentences=1))
 		#gui.WikiWindow(wikipedia.SearchWiki.images[0], wikipedia.summary(SearchWiki, sentences=1, auto_suggest=True, redirect=True))
 	
-	if 'riproduci' in command:
+	elif 'riproduci' in command:
 		song = command.replace('riproduci', '')
 		pywhatkit.playonyt(song)
 		speak("Riproduco " + song)
-
-	'''
-	if 'quanto fa' in command:
+'''
+	elif 'play' or 'pausa' in command:
+		#keyboard.press_and_release("ctrl+alt+p")
+		#device.emit(uinput.KEY_ctrl,1)
+		#pyautogui.hotkey('ctrlleft', 'altleft', 'p', 1)
+		pyautogui.keyDown('ctrlleft')
+		pyautogui.keyDown('alt')
+		pyautogui.keyDown('p')
+		sleep(0.5)
+		pyautogui.keyUp('ctrlleft')
+		pyautogui.keyUp('alt')
+		pyautogui.keyUp('p')'''
+'''
+	elif 'quanto fa' in command:
 		if '+' in command:
 			factor1 = command.replace('quanto fa', '')
 			factor1 = command.replace('più', '')
 	'''
 
 if __name__ == "__main__":
+	#while True:
 	run_lisa()
 	#Window = MainWindow()
