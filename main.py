@@ -2,6 +2,7 @@ import speech_recognition as sr
 from playsound import playsound
 import asyncio
 import time
+import random
 #import gui
 #import pyttsx3
 import os
@@ -60,6 +61,12 @@ def run_lisa():
 		current_time = now.strftime("%H:%M")
 		print("Orario Attuale =", current_time)
 		speak("Sono le " + current_time)
+
+	elif "creatore" in command:
+		speak("I miei creatori sono un gruppo di 4 ragazzi con molta voglia di fare")
+
+	elif "come stai" in command:
+		speak(random.choice(["Bene, grazie", "Faccio quello che mi piace, darti una mano", "Sono pronto per le tue domande"]))
 
 	elif 'cara' in command: 
 		speak("Ciao Zanna, come sta Giada?")
@@ -139,5 +146,6 @@ def run_lisa():
 	'''
 
 if __name__ == "__main__":
+	#while True:
 	run_lisa()
 	#Window = MainWindow()
